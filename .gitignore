@@ -1,0 +1,10 @@
+### vScode IDE ###
+.vscode
+### Node Modulles ###
+node_modules
+#### report####
+reports
+.tmp/
+
+##secret##
+
