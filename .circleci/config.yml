@@ -10,7 +10,7 @@ jobs:
       - node/with-cache:
           steps:
             - run: echo 'run npm install for setup'
-  ui:
+  ui-test:
     executor:
       name: node/default
     steps:
@@ -18,7 +18,7 @@ jobs:
       - node/with-cache:
           steps:
             - run: echo 'run ui-test'
-  api:
+  api-test:
     executor:
       name: node/default
     steps:
@@ -26,7 +26,7 @@ jobs:
       - node/with-cache:
           steps:
             - run: echo 'run api-test'
-  report:
+  test-reports:
     executor:
       name: node/default
     steps:
@@ -35,15 +35,15 @@ jobs:
           steps:
             - run: echo 'generating report'
 workflows:
-  ui-api-test:
+  ui-api-test-pipeline:
     jobs:
       - set-up
-      - api:
+      - api-test:
           requires:
             - set-up
-      - ui:
+      - ui-test:
           requires:
-            - api
-      - report:
+            - api-test
+      - test-reports:
           requires:
-            - ui
+            - ui-test
