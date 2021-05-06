@@ -10,7 +10,7 @@
     "clean": "npm run ui-clean && npm run api-clean",
     "ui-test": "./node_modules/.bin/wdio ./test/config/wdio.conf.js",
     "api-test": "./node_modules/.bin/cucumber-js -f json:./reports/api/cucumber.json test/featureFiles/api/ -r test/steps/api/",
-    "test": "npm run clean && npm run ui-test && npm run api-test && npm run ui-report && npm run api-report",
+    "test": "npm run clean && npm run ui-test && npm run api-test && npm run ui-report && npm run api-report"
    
   },
   "author": "SACHIN JADHAV",
