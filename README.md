@@ -2,9 +2,7 @@
 *Test Automation for UI and API test project for LPG  using WebdriverIO , cucumberjs   and other tools
  The framework is BDD enabled,Page Object Model,  using cucumber js to create feature file written in Gherkin Language*
 
-### CircleCi Setup: https://app.circleci.com/pipelines/github/SachinJadhav222/LPG-wdio-apickli-bdd-test?invite=true
 
-![Alt text](test/fixtures/CircleCi.PNG?raw=true "Optional Title")
 ### *Setup Instuctions*
 set .env.local file at root , this file will overwrite local environment variables, We can add login credentials ,  access tokens etc to this file .  best practice, keep this file in .gitignore and do not commit to git for security reasons. 
 ### *For demo purpuse I have commited .env.local file to git*
@@ -52,5 +50,14 @@ npm run ui-report
 ```
 npm test
 ```
+
+### CircleCi Setup: https://app.circleci.com/pipelines/github/SachinJadhav222/LPG-wdio-apickli-bdd-test?invite=true
+
+![Alt text](test/fixtures/CircleCi.PNG?raw=true "Optional Title")
+
+### Cucumber HTML Report
+
+![Alt text](test/fixtures/CucumberReport.PNG?raw=true "Optional Title")
+
 
  
