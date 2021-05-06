@@ -9,7 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: echo 'run npm install for setup'
+            - run: npm i
   ui-test:
     executor:
       name: node/default
@@ -25,7 +25,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: echo 'run api-test'
+            - run: npm run api-test-ci
   deploy:
     executor:
       name: node/default
