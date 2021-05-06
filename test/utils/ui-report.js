@@ -15,7 +15,7 @@ const options = {
         "Test Environment": process.env.ENV,
         "Browser": process.env.BROWSER,
         "Platform": process.env.PLATFORM,
-        "SDTE": process.env.SDET,
+        "SDET": process.env.SDET,
        
     }
 };

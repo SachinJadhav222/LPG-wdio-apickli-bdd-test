@@ -13,8 +13,8 @@ const options = {
   metadata: {
     "Date:": new Date(),
     "Test Environment": process.env.ENV,
-     "Platform": process.env.PLATFORM,
-    "SDTE": process.env.SDET,
+    "Platform": process.env.PLATFORM,
+    "SDET": process.env.SDET,
   },
 };
 
