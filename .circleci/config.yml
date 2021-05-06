@@ -35,4 +35,4 @@ workflows:
             - set-up
       - api:
           requires:
-            - ui
+            - set-up
