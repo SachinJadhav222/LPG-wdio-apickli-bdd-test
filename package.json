@@ -4,6 +4,7 @@
   "description": "Test automation framework using wdio and apickli and BDD",
   "scripts": {
     "api-report": "node ./test/utils/api-report.js",
+    "api-report-ci": "node ./test/utils/api-report-ci.js",
     "ui-report": "node ./test/utils/ui-report.js",
     "ui-clean": "node -e \"require('fs-extra').emptyDir('reports/ui');\"",
     "api-clean": "node -e \"require('fs-extra').emptyDir('reports/api');\"",

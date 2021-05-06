@@ -41,7 +41,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: echo 'generating report'
+            - run: npm run api-report-ci
 workflows:
   ui-api-test-pipeline:
     jobs:
