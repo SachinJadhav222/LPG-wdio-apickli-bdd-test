@@ -1,7 +1,22 @@
 const { Given, When, Then, Before, After } = require("cucumber");
+//const expect= require('expect-webdriverio').setOptions({ wait: 50000 });
 const assert = require("cucumber-assert");
 const locators = require("../../support/locator").locators;
 const urls = require("../../config/urls");
+
+// Before(function (scenarioResult, callback) {
+  
+
+//   console.log("<<<<--Before in steps ------------------->>>>>>>>>", this);
+//   require('expect-webdriverio').setOptions({ wait: 5000 })
+
+//   callback();
+// });
+
+// Before(()=>{
+//   console.log('This is Before--->>>')
+//  // require('expect-webdriverio').setOptions({ wait: 5000 })
+// });
 
 Given("I visit {string}", async function (URL) {
       await browser.url(urls[URL]);
@@ -38,6 +53,8 @@ Then(
   }
 );
 
-Then("I should see home page", () => {
-  console.log("This is URL =======>>>>", browser.getUrl());
+Then("I expect to see URL containing {string}", (expectedValue) => {
+  expect(browser).toHaveUrlContaining(expectedValue)
+  //expect(locators[selector]).toBeDisplayed()
+  //browser.$(locators[selector]).isVisible();
 });
