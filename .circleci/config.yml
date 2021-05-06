@@ -26,6 +26,14 @@ jobs:
       - node/with-cache:
           steps:
             - run: echo 'run api-test'
+  deploy:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: echo 'Deploy code'
   test-reports:
     executor:
       name: node/default
@@ -44,6 +52,9 @@ workflows:
       - ui-test:
           requires:
             - api-test
+      - deploy:
+          requires:
+            - ui-test
       - test-reports:
           requires:
             - ui-test
