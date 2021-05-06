@@ -1,6 +1,5 @@
 Feature: GoCity Attractions
-
-    As QA
+    As user
     I want to expolre gocity web
 
     Scenario: Go city Web
