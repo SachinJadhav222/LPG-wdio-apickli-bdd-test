@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  set-up:
     docker:
       # specify the version you desire here
       - image: circleci/node:10.19.0
@@ -49,12 +49,51 @@ jobs:
       - run:
           name: install-npm
           command: npm install
-        
-      # run tests!
-      - run: 
-          name: run ui tests
-          command: npm run ci-ui-test
-      # run api test
-      - run:
-          name: run api test
-          command: npm run ci-api-test    
+  api-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: echo 'npm run ci-api-test'
+  ui-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm run ui-test          
+  deploy:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: echo 'Deploy code'
+  test-reports:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: echo 'npm run api-report'       
+workflows:
+  ui-api-test-pipeline:
+    jobs:
+      - set-up
+      - api-test:
+          requires:
+            - set-up
+      - ui-test:
+          requires:
+            - api-test
+      - deploy:
+          requires:
+            - ui-test
+      - test-reports:
+          requires:
+            - ui-test      
