@@ -9,54 +9,54 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:10.19.0
       - image: selenium/standalone-chrome:3.11.0
-      
-      # Specify service dependencies here if necessary  
+
+      # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
     working_directory: ~/repo
-            
+
     steps:
-      - checkout    
+      - checkout
       - setup_remote_docker
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-     
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
       - run: yarn install
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-          
+
       - run:
           name: create docker network
           command: docker network create grid
-     
+
       - run:
           name: install selenium-hub
           command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.11.0
-          
+
       - run:
           name: install selenium-node
           command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
-      
+
       - run:
           name: install-npm
           command: npm install
       # run tests!
-      - run: 
+      - run:
           name: run ui tests
           command: npm run ci-ui-test
       # run api test
       - run:
           name: run api test
-          command: npm run ci-api-test   
+          command: npm run ci-api-test
   # api-test:
   #   executor:
   #     name: node/default
@@ -72,21 +72,23 @@ jobs:
   #     - checkout
   #     - node/with-cache:
   #         steps:
-  #           - run: npm run ui-test          
+  #           - run: npm run ui-test
   deploy:
-    executor:
-      name: node/default
+    docker:
+      - image: circleci/node:10.19.0
     steps:
+      - checkout
       - run:
           name: Deploy
-          command: echo 'Delpoys' 
+          command: echo 'Delpoys'
   reports:
-    executor:
-      name: node/default
+    docker:
+      - image: circleci/node:10.19.0
     steps:
+      - checkout
       - run:
           name: Test-Reports
-          command: echo 'Test- Reports'       
+          command: echo 'Test- Reports'
 workflows:
   version: 2
   test-pipeline:
@@ -105,4 +107,4 @@ workflows:
       #       - ui-test
       # - test-reports:
       #     requires:
-      #       - ui-test      
+      #       - ui-test
