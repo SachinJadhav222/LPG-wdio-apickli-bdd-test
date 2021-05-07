@@ -73,27 +73,27 @@ jobs:
   #     - node/with-cache:
   #         steps:
   #           - run: npm run ui-test          
-  # deploy:
-  #   executor:
-  #     name: node/default
-  #   steps:
-  #     - checkout
-  #     - node/with-cache:
-  #         steps:
-  #           - run: echo 'Deploy code'
-  # test-reports:
-  #   executor:
-  #     name: node/default
-  #   steps:
-  #     - checkout
-  #     - node/with-cache:
-  #         steps:
-  #           - run: echo 'npm run api-report'       
+  deploy:
+    executor:
+      name: node/default
+    steps:
+      - run:
+          name: Deploy
+          command: echo 'Delpoys' 
+  reports:
+    executor:
+      name: node/default
+    steps:
+      - run:
+          name: Test-Reports
+          command: echo 'Test- Reports'       
 workflows:
   version: 2
   test-pipeline:
     jobs:
       - build
+      - deploy
+      - reports
       # - api-test:
       #     requires:
       #       - set-up
