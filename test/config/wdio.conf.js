@@ -68,7 +68,9 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'error',
+    colouredLogs: true,
+    screenshotsPath: './reports/ui/screenshots/',
     //
     // Set specific log levels per logger
     // loggers:
@@ -157,6 +159,8 @@ exports.config = {
         tagExpression: '',  // <string> (expression) only execute the features or scenarios with tags matching the expression
         timeout: 60000,     // <number> timeout for step definitions
         ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings.
+        storeScreenshots: true,
+        scenshotsDirectory: './reports/ui/screenshots'
     },
     
     //
@@ -229,10 +233,12 @@ exports.config = {
        // console.log('Taking screenshot---->>>>')
         if (result.status === 'passed' ) {
            browser.saveScreenshot('reports/ui/222.png')
-            // return browser.takeScreenshot().then(function(screenshot) {
-            //     return me.attach(screenshot, "image/png");
-            //}
-           // );
+         // const screenShot1= browser.saveScreenshot('reports/ui/222.png')
+        //  this.attach(screenShot1,'image/png')
+        //     return browser.takeScreenshot().then(function(screenshot) {
+        //         return me.attach(screenshot, "image/png");
+        //     }
+        //    );
         }
 
     },

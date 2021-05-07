@@ -1,12 +1,6 @@
 const merge = require("deepmerge");
-const ele1 = require("./../locators/loc01_homePage");
-const ele2 = require("./../locators/02.homePage");
-const ele3 = require("./../locators/03.contactUsPage");
+const ele1 = require("../locators/homePage");
+const ele2 = require("../locators/03.contactUsPage");
 
+module.exports.locators = merge.all([ele1, ele2]);
 
-const locators = merge.all([ele1, ele2, ele3]);
-//console.log(locators)
-
-module.exports = {
-  locators: locators
-};
