@@ -83,18 +83,18 @@ jobs:
             - run: echo 'npm run api-report'       
 workflows:
   version: 2
-  ui-api-test-pipeline:
+  test-pipeline:
     jobs:
       - set-up
-      - api-test:
-          requires:
-            - set-up
-      - ui-test:
-          requires:
-            - api-test
-      - deploy:
-          requires:
-            - ui-test
-      - test-reports:
-          requires:
-            - ui-test      
+      # - api-test:
+      #     requires:
+      #       - set-up
+      # - ui-test:
+      #     requires:
+      #       - api-test
+      # - deploy:
+      #     requires:
+      #       - ui-test
+      # - test-reports:
+      #     requires:
+      #       - ui-test      
