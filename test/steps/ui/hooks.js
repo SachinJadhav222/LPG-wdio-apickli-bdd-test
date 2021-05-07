@@ -1,5 +1,12 @@
 // const { HookScenarioResult } = require( 'cucumber');
-// const { Before, After } = require('cucumber');
+ const { Before, After } = require('cucumber');
+
+
+Before(()=>{
+  console.log('This is Before--->>>')
+  require('expect-webdriverio').setOptions({ wait: 5000 })
+});
+
 // After(async function(scenario) {
 //     const ss = await browser.takeScreenshot();
 //     const img = Buffer.alloc(ss.length, ss, 'base64');

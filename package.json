@@ -9,18 +9,12 @@
     "api-clean": "node -e \"require('fs-extra').emptyDir('reports/api');\"",
     "clean": "npm run ui-clean && npm run api-clean",
     "ui-test": "./node_modules/.bin/wdio ./test/config/wdio.conf.js",
-    "api-test": "./node_modules/.bin/cucumber-js -f json:./reports/api/cucumber.json test/featureFiles/api/ -r test/steps/api/",
+    "api-test": "./node_modules/.bin/cucumber-js -f json:./reports/api/cucumber.json test/features/api/ -r test/steps/api/",
     "test": "npm run clean && npm run ui-test && npm run api-test && npm run ui-report && npm run api-report"
-   
   },
   "author": "SACHIN JADHAV",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.20.0",
-    "dotenv-flow": "^3.2.0",
-    "faker": "^5.1.0",
-    "lodash": "^4.17.20",
-    "log4js": "^6.3.0",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
@@ -28,7 +22,13 @@
     "@wdio/cli": "^5.22.4",
     "@wdio/mocha-framework": "^5.23.0",
     "@wdio/selenium-standalone-service": "^6.11.0",
+    "axios": "^0.20.0",
     "deepmerge": "4.2.2",
+    "dotenv-flow": "^3.2.0",
+    "expect-webdriverio": "^2.0.1",
+    "faker": "^5.1.0",
+    "lodash": "^4.17.20",
+    "log4js": "^6.3.0",
     "wdio-json-reporter": "^1.4.0",
     "yaml-merge": "0.0.2"
   },

@@ -20,11 +20,11 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/featureFiles/ui/*.feature'
+        './test/features/ui/*.feature'
     ],
     // Patterns to exclude.
     exclude: [
-        './test/featureFiles/api/*.feature'
+        './test/features/api/*.feature'
     ],
     //
     // ============
@@ -181,8 +181,9 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    // beforeSession: function (config, capabilities, specs) {
-    // },
+     beforeSession: function (config, capabilities, specs) {
+        require('expect-webdriverio').setOptions({ wait: 50000 })
+     },
     /**
      * Gets executed before test execution begins. At this point you can access to all global
      * variables like `browser`. It is the perfect place to define custom commands.
