@@ -94,8 +94,12 @@ workflows:
   test-pipeline:
     jobs:
       - build
-      - deploy
-      - reports
+      - deploy:
+          requires:
+            - build
+      - reports:
+          requires:
+            - build
       # - api-test:
       #     requires:
       #       - set-up
