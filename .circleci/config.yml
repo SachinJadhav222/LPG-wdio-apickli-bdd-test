@@ -49,14 +49,14 @@ jobs:
       - run:
           name: install-npm
           command: npm install
-      # run tests!
-      - run:
-          name: run ui tests
-          command: npm run ci-ui-test
-      # run api test
-      - run:
-          name: run api test
-          command: npm run ci-api-test
+      # # run tests!
+      # - run:
+      #     name: run ui tests
+      #     command: npm run ci-ui-test
+      # # run api test
+      # - run:
+      #     name: run api test
+      #     command: npm run ci-api-test
   # api-test:
   #   executor:
   #     name: node/default
@@ -73,6 +73,22 @@ jobs:
   #     - node/with-cache:
   #         steps:
   #           - run: npm run ui-test
+  api-test:
+    docker:
+      - image: circleci/node:10.19.0
+    steps:
+      - checkout
+      - run:
+          name: api-test
+          command: npm run ci-api-test
+  ui-test:
+    docker:
+      - image: circleci/node:10.19.0
+    steps:
+      - checkout
+      - run:
+          name: ui-test
+          command: npm run ci-ui-test
   deploy:
     docker:
       - image: circleci/node:10.19.0
@@ -80,7 +96,7 @@ jobs:
       - checkout
       - run:
           name: Deploy
-          command: echo 'Delpoys'
+          command: echo 'Delpoys'                
   reports:
     docker:
       - image: circleci/node:10.19.0
@@ -94,13 +110,18 @@ workflows:
   test-pipeline:
     jobs:
       - build
+      - api-test:
+          requires:
+            - build
+      - ui-test:
+          requires:
+            - api-test
       - deploy:
           requires:
-            - build
+            - ui-test
       - reports:
           requires:
-            - build
-      # - api-test:
+            - ui-test
       #     requires:
       #       - set-up
       # - ui-test:
