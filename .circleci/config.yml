@@ -53,5 +53,5 @@ jobs:
       # run tests!
       - run: 
           name: run tests
-          command: npm run ui-test
+          command: npm run ci-ui-test
           

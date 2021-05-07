@@ -9,6 +9,7 @@
     "api-clean": "node -e \"require('fs-extra').emptyDir('reports/api');\"",
     "clean": "node ./test/utils/clean-up.js",
     "ui-test": "./node_modules/.bin/wdio ./test/config/wdio.conf.js",
+    "ci-ui-test": "./node_modules/.bin/wdio ./test/config/ci-wdio.conf.js",
     "api-test": "./node_modules/.bin/cucumber-js -f json:./reports/api/cucumber.json test/features/api/ -r test/steps/api/",
     "ci-api-test": "./node_modules/.bin/cucumber-js -f json:./cucumber.json test/features/api/ -r test/steps/api/",
     "test": "npm run clean && npm run ui-test && npm run api-test && npm run ui-report && npm run api-report"
