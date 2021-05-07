@@ -17,7 +17,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: echo 'npm run ui-test'
+            - run: npm run ui-test
   api-test:
     executor:
       name: node/default
@@ -25,7 +25,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm run api-test
+            - run: echo 'npm run ci-api-test'
   deploy:
     executor:
       name: node/default
