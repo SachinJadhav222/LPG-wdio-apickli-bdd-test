@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  set-up:
+  build:
     docker:
       # specify the version you desire here
       - image: circleci/node:10.19.0
@@ -49,43 +49,51 @@ jobs:
       - run:
           name: install-npm
           command: npm install
-  api-test:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: echo 'npm run ci-api-test'
-  ui-test:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: npm run ui-test          
-  deploy:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: echo 'Deploy code'
-  test-reports:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: echo 'npm run api-report'       
+      # run tests!
+      - run: 
+          name: run ui tests
+          command: npm run ci-ui-test
+      # run api test
+      - run:
+          name: run api test
+          command: npm run ci-api-test   
+  # api-test:
+  #   executor:
+  #     name: node/default
+  #   steps:
+  #     - checkout
+  #     - node/with-cache:
+  #         steps:
+  #           - run: echo 'npm run ci-api-test'
+  # ui-test:
+  #   executor:
+  #     name: node/default
+  #   steps:
+  #     - checkout
+  #     - node/with-cache:
+  #         steps:
+  #           - run: npm run ui-test          
+  # deploy:
+  #   executor:
+  #     name: node/default
+  #   steps:
+  #     - checkout
+  #     - node/with-cache:
+  #         steps:
+  #           - run: echo 'Deploy code'
+  # test-reports:
+  #   executor:
+  #     name: node/default
+  #   steps:
+  #     - checkout
+  #     - node/with-cache:
+  #         steps:
+  #           - run: echo 'npm run api-report'       
 workflows:
   version: 2
   test-pipeline:
     jobs:
-      - set-up
+      - build
       # - api-test:
       #     requires:
       #       - set-up
