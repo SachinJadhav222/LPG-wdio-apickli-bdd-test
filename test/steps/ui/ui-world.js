@@ -17,8 +17,11 @@ class CustomWorld {
     };
     this.takeScreenshot = function (message) {
       const timestamp = moment().format("YYYYMMDD-HHmmss.SSS");
-      // fs.ensureDirSync('./reports/ui/screenshots/');
-      const filepath = path.join("./reports/screenshots/", timestamp + ".png");
+      const screenshotPath= './reports/screenshots'; 
+        if (!fs.existsSync(screenshotPath)){
+          return  fs.mkdirSync(screenshotPath);
+        }
+      const filepath = path.join(screenshotPath+"/", timestamp + ".png");
       browser.saveScreenshot(filepath);
       this.logMessage(message) ;
       process.emit("test:screenshot", filepath);
