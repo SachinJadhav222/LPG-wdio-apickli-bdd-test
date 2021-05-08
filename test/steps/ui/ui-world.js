@@ -1,10 +1,14 @@
-const { setWorldConstructor } = require("cucumber");
-// const expect= require('expect-webdriverio').setOptions({ wait: 50000 });
+const { setWorldConstructor,attach } = require("cucumber");
+getLocators = require("../../support/locator").locators;
+const getUrl = require("../../config/urls");
+
 class CustomWorld {
   constructor({ parameters }) {
     this.context = {};
+    this.attach= attach;
     this.variable = 0;
-   // this.expect=expect;
+    this.getLocators = getLocators;
+    this.getUrl=getUrl;
   }
 
   setTo(number) {
