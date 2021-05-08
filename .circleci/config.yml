@@ -46,6 +46,13 @@ jobs:
       - run:
           name: run ui tests
           command: npm test
+
+      - store_artifacts:
+          path: reports/ui/ui-test-report.html
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts    
       # # run api test
       # - run:
       #     name: run api test
