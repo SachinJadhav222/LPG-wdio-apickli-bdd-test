@@ -1,3 +1,7 @@
+const path = require('path');
+const moment = require('moment');
+
+
 exports.config = {
     //
     // ====================
@@ -70,7 +74,7 @@ exports.config = {
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: 'error',
     colouredLogs: true,
-    screenshotsPath: './reports/ui/screenshots/',
+    screenshotsPath: './reports/screenshots/',
     //
     // Set specific log levels per logger
     // loggers:
@@ -161,7 +165,7 @@ exports.config = {
         timeout: 60000,     // <number> timeout for step definitions
         ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings.
         storeScreenshots: true,
-        scenshotsDirectory: './reports/ui/screenshots'
+        scenshotsDirectory: './reports/screenshots'
     },
     
     //
@@ -230,17 +234,26 @@ exports.config = {
 
     afterScenario: function (uri, feature, scenario, result, sourceLocation) {
        // console.log('This is after scenario-----> ',uri,feature.name,scenario.name,result.status)
-        var me = this;
+       // var me = this;
        // console.log('Taking screenshot---->>>>')
-        if (result.status === 'passed' ) {
-           browser.saveScreenshot('reports/ui/222.png')
+       // if (result.status === 'passed' ) {
+       //    browser.saveScreenshot('reports/ui/222.png')
          // const screenShot1= browser.saveScreenshot('reports/ui/222.png')
         //  this.attach(screenShot1,'image/png')
         //     return browser.takeScreenshot().then(function(screenshot) {
         //         return me.attach(screenshot, "image/png");
         //     }
         //    );
-        }
+
+        // if (result.status.passed) {
+        //     return;
+        // }
+        const timestamp = moment().format('YYYYMMDD-HHmmss.SSS');
+        const filepath = path.join('./reports/screenshots/', timestamp + '.png');
+        browser.saveScreenshot(filepath);
+        process.emit('test:screenshot', filepath);
+       // console.log('This is screenshot----->>',this)
+        
 
     },
     /**

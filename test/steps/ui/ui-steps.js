@@ -2,10 +2,12 @@ const { Given, When, Then, Before, After } = require("cucumber");
 const assert = require("cucumber-assert");
 
 Given("I visit {string}", async function (URL) {
+  this.myName();
   await browser.url(this.getUrl[URL]);
 });
 
 Then("I entered {string} at {string}", function (expectedValue, selector) {
+  
   browser.$(this.getLocators[selector]).setValue(expectedValue);
 });
 Then("I click on {string}", function (selector) {
@@ -13,6 +15,7 @@ Then("I click on {string}", function (selector) {
 });
 
 Then("I shloud see Page title {string}", function (expectedValue) {
+  this.takeScreenshot('This is my screenshot--->>>')
   assert.equal(browser.getTitle(), expectedValue);
 });
 
