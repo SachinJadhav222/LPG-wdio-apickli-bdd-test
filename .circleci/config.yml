@@ -45,11 +45,16 @@ jobs:
       # run tests!
       - run:
           name: run ui tests
-          command: npm run ci-ui-test
-      # run api test
-      - run:
-          name: run api test
-          command: npm run ci-api-test
+          command: npm test
+      # # run api test
+      # - run:
+      #     name: run api test
+      #     command: npm run ci-api-test
+      # # generate test reports
+      # - run:
+      #     name: generate test reports
+      #     command: npm run ci-api-test
+    
 
   api-test:
     docker:
