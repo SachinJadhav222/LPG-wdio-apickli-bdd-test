@@ -1,7 +1,5 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
+# CircleCI 2.0 configuration file
+
 version: 2
 jobs:
   build:
@@ -9,11 +7,6 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:10.19.0
       - image: selenium/standalone-chrome:3.11.0
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
 
     working_directory: ~/repo
 
@@ -49,30 +42,15 @@ jobs:
       - run:
           name: install-npm
           command: npm install
-      # # run tests!
-      # - run:
-      #     name: run ui tests
-      #     command: npm run ci-ui-test
-      # # run api test
-      # - run:
-      #     name: run api test
-      #     command: npm run ci-api-test
-  # api-test:
-  #   executor:
-  #     name: node/default
-  #   steps:
-  #     - checkout
-  #     - node/with-cache:
-  #         steps:
-  #           - run: echo 'npm run ci-api-test'
-  # ui-test:
-  #   executor:
-  #     name: node/default
-  #   steps:
-  #     - checkout
-  #     - node/with-cache:
-  #         steps:
-  #           - run: npm run ui-test
+      # run tests!
+      - run:
+          name: run ui tests
+          command: npm run ci-ui-test
+      # run api test
+      - run:
+          name: run api test
+          command: npm run ci-api-test
+
   api-test:
     docker:
       - image: circleci/node:10.19.0
@@ -81,16 +59,16 @@ jobs:
       - checkout
       - run:
           name: api-test
-          command: npm run ci-api-test
+          command: echo 'npm run ci-api-test'
   ui-test:
     docker:
       - image: circleci/node:10.19.0
-    working_directory: ~/repo  
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
           name: ui-test
-          command: npm run ci-ui-test
+          command: echo 'npm run ci-ui-test'
   deploy:
     docker:
       - image: circleci/node:10.19.0
@@ -98,7 +76,7 @@ jobs:
       - checkout
       - run:
           name: Deploy
-          command: echo 'Delpoys'                
+          command: echo 'Delpoys'
   reports:
     docker:
       - image: circleci/node:10.19.0
@@ -124,14 +102,3 @@ workflows:
       - reports:
           requires:
             - ui-test
-      #     requires:
-      #       - set-up
-      # - ui-test:
-      #     requires:
-      #       - api-test
-      # - deploy:
-      #     requires:
-      #       - ui-test
-      # - test-reports:
-      #     requires:
-      #       - ui-test
