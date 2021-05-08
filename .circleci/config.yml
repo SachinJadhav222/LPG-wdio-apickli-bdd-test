@@ -49,11 +49,18 @@ jobs:
 
       - store_artifacts:
           path: reports/ui/ui-test-report.html
-          destination: artifact-file
+          destination: ui-test-report
 
       - store_artifacts:
           path: /tmp/artifacts    
-      # # run api test
+      
+      - store_artifacts:
+          path: reports/api/api-test-report.html
+          destination: api-test-report
+
+      - store_artifacts:
+          path: /tmp/artifacts    
+          # # run api test
       # - run:
       #     name: run api test
       #     command: npm run ci-api-test
