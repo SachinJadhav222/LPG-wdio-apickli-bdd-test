@@ -3,10 +3,10 @@
 ### Node Modulles ###
 node_modules
 #### report####
-# reports/api/**
-# reports/ui/**
-# reports/screenshots/**
-# .tmp/
+reports/api/**
+reports/ui/**
+reports/screenshots/**
+.tmp/
 
 ##secret##
 
