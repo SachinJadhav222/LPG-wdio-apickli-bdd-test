@@ -4,6 +4,7 @@
 
 const prettyJson = require("prettyjson");
 const { Before, Given, When, Then } = require("cucumber");
+const chalk= require('chalk')
 
 const stepContext = {};
 
@@ -110,11 +111,13 @@ Given(
 );
 
 When(/^I GET (.*)$/, function (resource, callback) {
+
   this.apickli.get(resource, function (error, response) {
     if (error) {
       callback(new Error(error));
     }
-
+   console.log(chalk.cyan('\n','Response Body -->>>'))
+   console.log(chalk.yellow('\n',response.body))
     callback();
   });
 });
