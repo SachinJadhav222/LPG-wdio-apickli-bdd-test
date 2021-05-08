@@ -76,6 +76,7 @@ jobs:
   api-test:
     docker:
       - image: circleci/node:10.19.0
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
@@ -84,6 +85,7 @@ jobs:
   ui-test:
     docker:
       - image: circleci/node:10.19.0
+    working_directory: ~/repo  
     steps:
       - checkout
       - run:
