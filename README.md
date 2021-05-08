@@ -53,6 +53,11 @@ npm test
 
 ### CircleCi Setup: https://app.circleci.com/pipelines/github/SachinJadhav222/LPG-wdio-apickli-bdd-test?invite=true
 
+*Steps to view Test report in CI*
+1. Go to project dashboard /pipeline
+2. Click on build
+3. Click on Artifacts - test reports are saved here on CircleCI cloud 
+
 ![Alt text](test/fixtures/CircleCi.PNG?raw=true "Optional Title")
 
 ### Cucumber HTML Report
