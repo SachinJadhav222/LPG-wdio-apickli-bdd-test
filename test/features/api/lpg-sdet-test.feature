@@ -3,12 +3,14 @@ Feature: Get the city Attraction using REST API
 
     As QA
     I want to check REST API response
+    Background: Set Base URL
+        Given I set base URL as "BASE_URL"
 
     Scenario: Get All Citys
         When I GET /citys
         Then response body should be valid json
         Then response code should be 200
-        Then response body should be valid according to schema file ./test/fixtures/get-simple.schema
+        Then response body should be valid according to schema file ./test/fixtures/lpg-get-simple.schema
         Then response body should contain New York
         Then response body should contain London
         Then response body should contain Los Angeles
@@ -22,7 +24,7 @@ Feature: Get the city Attraction using REST API
         When I GET /attractions
         Then response body should be valid json
         Then response code should be 200
-        Then response body should be valid according to schema file ./test/fixtures/get-simple.schema
+        Then response body should be valid according to schema file ./test/fixtures/lpg-get-simple.schema
         Then response body should contain New York
         Then response body should contain Museum
 
@@ -36,7 +38,7 @@ Feature: Get the city Attraction using REST API
         When I GET /attractions
         Then response body should be valid json
         Then response code should be 200
-        Then response body should be valid according to schema file ./test/fixtures/get-simple.schema
+        Then response body should be valid according to schema file ./test/fixtures/lpg-get-simple.schema
         Then response body should contain New York
         Then response body should contain Museum
 

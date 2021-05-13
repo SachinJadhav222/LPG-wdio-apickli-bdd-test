@@ -5,6 +5,7 @@ const jsonPath = require('JSONPath');
 const select = require('xpath.js');
 const Dom = require('xmldom').DOMParser;
 const fs = require('fs');
+const chalk= require('chalk');
 const path = require('path');
 const jsonSchemaValidator = require('is-my-json-valid');
 const spec = require('swagger-tools').specs.v2;
@@ -139,6 +140,7 @@ Apickli.prototype.setRequestBody = function(body) {
 };
 
 Apickli.prototype.setQueryParameters = function(queryParameters) {
+ // console.log('Quary Parameters--->>>',queryParameters)
   const self = this;
   const paramsObject = {};
 
@@ -149,6 +151,8 @@ Apickli.prototype.setQueryParameters = function(queryParameters) {
   });
 
   this.queryParameters = paramsObject;
+  console.log(chalk.magenta('\nQuary Parameters --->>>'));
+  console.log(paramsObject);
 };
 
 Apickli.prototype.setFormParameters = function(formParameters) {
@@ -162,6 +166,8 @@ Apickli.prototype.setFormParameters = function(formParameters) {
   });
 
   this.formParameters = paramsObject;
+  console.log(chalk.magenta('\nForm Parameters --->>>'));
+  console.log(paramsObject);
 };
 
 Apickli.prototype.setHeaders = function(headersTable) {
@@ -449,7 +455,8 @@ Apickli.prototype.sendRequest = function(method, resource, callback) {
   options.method = method;
   options.headers = this.headers;
   options.qs = this.queryParameters;
-
+  // console.log(chalk.red('\nRequets Body --->>>'));
+  // console.log(this.requestBody);
   if (this.requestBody.length > 0) {
     options.body = this.requestBody;
   } else if (Object.keys(this.formParameters).length > 0) {

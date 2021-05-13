@@ -4,7 +4,9 @@
 
 const prettyJson = require("prettyjson");
 const { Before, Given, When, Then } = require("cucumber");
-const chalk= require('chalk')
+const chalk = require("chalk");
+const apickli = require("../../support/apickli");
+const getURL = require("../../config/urls");
 
 const stepContext = {};
 
@@ -45,6 +47,11 @@ Before(function (scenarioResult, callback) {
   // };
 
   callback();
+});
+
+Given("I set base URL as {string}", function (base_url) {
+  this.apickli = new apickli.Apickli(getURL[base_url]);
+  console.log("\nBase URL:- ", getURL[base_url]);
 });
 
 Given(
@@ -111,13 +118,12 @@ Given(
 );
 
 When(/^I GET (.*)$/, function (resource, callback) {
-
   this.apickli.get(resource, function (error, response) {
     if (error) {
       callback(new Error(error));
     }
-   console.log(chalk.cyan('\n','Response Body -->>>'))
-   console.log(chalk.yellow('\n',response.body))
+    console.log(chalk.cyan("\n", "Response Body -->>>"));
+    console.log(chalk.yellow("\n", response.body));
     callback();
   });
 });
@@ -220,18 +226,16 @@ Then(
 );
 
 Then(/^response body should contain (.*)$/, function (expression, callback) {
-  const assertion = this.apickli.assertResponseBodyContainsExpression(
-    expression
-  );
+  const assertion =
+    this.apickli.assertResponseBodyContainsExpression(expression);
   callbackWithAssertion(callback, assertion);
 });
 
 Then(
   /^response body should not contain (.*)$/,
   function (expression, callback) {
-    const assertion = this.apickli.assertResponseBodyContainsExpression(
-      expression
-    );
+    const assertion =
+      this.apickli.assertResponseBodyContainsExpression(expression);
     assertion.success = !assertion.success;
     callbackWithAssertion(callback, assertion);
   }

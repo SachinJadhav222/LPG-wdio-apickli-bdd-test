@@ -1,6 +1,7 @@
 const fs = require("fs");
 
 const featureFilePathUI = "./test/features/ui/*.feature";
+const uiStepsFilePath= "./test/steps/ui/*.js";
 const featureFilePathAPI = "./test/features/api/*.feature";
 
 const apiRepPath = "./reports/api";
@@ -22,5 +23,6 @@ module.exports = {
   screenshotPath,
   uiJSONPath,
   featureFilePathUI,
+  uiStepsFilePath,
   featureFilePathAPI,
 };

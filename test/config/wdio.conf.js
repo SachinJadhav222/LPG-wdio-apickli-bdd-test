@@ -1,9 +1,11 @@
 const path = require("path");
 const moment = require("moment");
+const chalk= require("chalk")
 const {
   screenshotPath,
   uiJSONPath,
   featureFilePathUI,
+  uiStepsFilePath,
   featureFilePathAPI,
 } = require("./../utils/dir-path");
 
@@ -116,6 +118,7 @@ exports.config = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
+  
   services: ["chromedriver"],
 
   // Framework you want to run your specs with.
@@ -153,7 +156,7 @@ exports.config = {
   //
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
-    require: ["./test/steps/ui/*.js"], // <string[]> (file/dir) require files before executing features
+    require: [uiStepsFilePath], // <string[]> (file/dir) require files before executing features
     backtrace: false, // <boolean> show full backtrace for errors
     requireModule: [], // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
     dryRun: false, // <boolean> invoke formatters without executing steps
@@ -216,13 +219,16 @@ exports.config = {
    * Runs before a Cucumber feature
    */
   // beforeFeature: function (uri, feature, scenarios) {
+  //   console.log(chalk.yellow(`FEATURE ---->>>>  ${feature}`))
+  //   console.log(chalk.yellow(`URI ---->>>>  ${uri}`))
+  //   console.log(chalk.yellow(`Scenarios ---->>>>  ${scenarios}`))
   // },
   /**
    * Runs before a Cucumber scenario
    */
   // beforeScenario: function (uri, feature, scenario, sourceLocation) {
   // },
-  /**
+  /**fea
    * Runs before a Cucumber step
    */
   // beforeStep: function (uri, feature, stepData, context) {

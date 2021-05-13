@@ -1,4 +1,4 @@
-const { Before, After, Status } = require("cucumber");
+const { Before, After, Status} = require("cucumber");
 const chalk= require('chalk')
 
 Before(function (scenario) {
@@ -7,5 +7,6 @@ Before(function (scenario) {
 });
 
 After(function (scenario) {
-  console.log(chalk.green('\n',"<<<---------->>>"));
+ // console.log(chalk.green('\n',"<<<---------->>>",this.attach));
+ // console.log(chalk.green('\n',"<<<---------->>>",scenario));
 });
