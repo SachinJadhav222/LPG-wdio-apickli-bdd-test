@@ -3,10 +3,11 @@
 "use strict";
 
 const prettyJson = require("prettyjson");
-const { Before, Given, When, Then } = require("cucumber");
+const { Given, When, Then } = require("cucumber");
 const chalk = require("chalk");
 const apickli = require("../../support/apickli");
 const getURL = require("../../config/urls");
+const getSecret=require("./../../secrets/secret")
 
 const stepContext = {};
 
@@ -29,35 +30,26 @@ const callbackWithAssertion = function (callback, assertion) {
   }
 };
 
-Before(function (scenarioResult, callback) {
-  // https://github.com/cucumber/cucumber-js/issues/891
-  // stepContext.step = step.getName;
-  //stepContext.scenario = scenario.getName;
-
-  //console.log("<<<<--Before in steps ------------------->>>>>>>>>", this);
-  // console.log(stepContext)
-  // this.apickli = new apickli.Apickli('http', 'httpbin.org');
-  // this.apickli.addRequestHeader('Cache-Control', 'no-cache');
-  // this.apickli.clientTLSConfig = {
-  //   valid: {
-  //     key: './test/mock_target/certs/client-key.pem',
-  //     cert: './test/mock_target/certs/client-crt.pem',
-  //     ca: './test/mock_target/certs/ca-crt.pem',
-  //   },
-  // };
-
-  callback();
-});
 
 Given("I set base URL as {string}", function (base_url) {
   this.apickli = new apickli.Apickli(getURL[base_url]);
   console.log("\nBase URL:- ", getURL[base_url]);
 });
 
-Given(
-  /^I set (.*) header to (.*)$/,
+ Given(
+  "I set {string} header to {string}",
   function (headerName, headerValue, callback) {
+    
     this.apickli.addRequestHeader(headerName, headerValue);
+    callback();
+  }
+);
+ 
+
+Given(
+  "I set Authorization header as {string}",
+  function (headerValue, callback) {
+    this.apickli.addRequestHeader("Authorization", getSecret[headerValue]);
     callback();
   }
 );
@@ -117,7 +109,7 @@ Given(
   }
 );
 
-When(/^I GET (.*)$/, function (resource, callback) {
+When("I GET {string}", function (resource, callback) {
   this.apickli.get(resource, function (error, response) {
     if (error) {
       callback(new Error(error));
@@ -190,7 +182,7 @@ Then(/^response header (.*) should not exist$/, function (header, callback) {
 });
 
 Then(
-  /^response body should be valid (xml|json)$/,
+  "response body should be valid {string}",
   function (contentType, callback) {
     const assertion = this.apickli.assertResponseBodyContentType(contentType);
     callbackWithAssertion(callback, assertion);
@@ -225,7 +217,15 @@ Then(
   }
 );
 
-Then(/^response body should contain (.*)$/, function (expression, callback) {
+Then("response body should match", function (expression, callback) {
+  console.log('Expected body--->>>',expression);
+  const assertion =
+    this.apickli.assertResponseBody(expression);
+  callbackWithAssertion(callback, assertion);
+});
+
+
+Then("response body should contain {string}", function (expression, callback) {
   const assertion =
     this.apickli.assertResponseBodyContainsExpression(expression);
   callbackWithAssertion(callback, assertion);

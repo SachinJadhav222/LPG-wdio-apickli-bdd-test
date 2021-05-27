@@ -137,6 +137,7 @@ Apickli.prototype.addCookie = function(cookie) {
 Apickli.prototype.setRequestBody = function(body) {
   body = this.replaceVariables(body);
   this.requestBody = body;
+  console.log(chalk.magenta('\nRequest Body --->>>',this.requestBody));
 };
 
 Apickli.prototype.setQueryParameters = function(queryParameters) {
@@ -268,8 +269,24 @@ Apickli.prototype.assertPathInResponseBodyMatchesExpression = function(path, reg
   return getAssertionResult(success, regexp, evalValue, this);
 };
 
+Apickli.prototype.assertResponseBody= function(expectedBody) {
+  //expression = this.replaceVariables(expression);
+   console.log('Response Body Recieved---->>',this.getResponseObject().body)
+  // const regex = new RegExp(expression);
+  // const success = regex.test(this.getResponseObject().body);
+  // return getAssertionResult(success, expression, null, this);
+  if(this.getResponseObject().body.match(expectedBody)){
+    console.log('Response Body Matched---->>')
+    return true
+  }else{
+    console.log('Response Body NOT Matched---->>')
+    return false
+  }
+};
+
 Apickli.prototype.assertResponseBodyContainsExpression = function(expression) {
   expression = this.replaceVariables(expression);
+  console.log('Ahter replace vailabe---->>',expression)
   const regex = new RegExp(expression);
   const success = regex.test(this.getResponseObject().body);
   return getAssertionResult(success, expression, null, this);

@@ -1,8 +1,20 @@
 const fs = require("fs");
 
 const featureFilePathUI = "./test/features/ui/*.feature";
-const uiStepsFilePath= "./test/steps/ui/*.js";
+const uiStepsFilePath = "./test/steps/ui/*.js";
 const featureFilePathAPI = "./test/features/api/*.feature";
+
+const secretFilePath = "./test/secret";
+if (!fs.existsSync(secretFilePath)) {
+  fs.mkdirSync(secretFilePath);
+
+  fs.open("secret.js", "w", (err, file) => {
+    if (err) {
+      throw err;
+    }
+    console.log("File is created in secredt folder");
+  });
+}
 
 const apiRepPath = "./reports/api";
 if (!fs.existsSync(apiRepPath)) {
